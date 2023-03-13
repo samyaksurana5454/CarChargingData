@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+
+    <title>Vehicle Data</title>
+    <link rel="stylesheet" href="car.css">
+</head>
+<body>
+<h4>MAKE:  {{ make }} MODEL:  {{ model }} YEAR:  {{ year }}</h4>
+<p>Distance: {{ distance }} mi</p>
+<p>Location: {{ latitude }}, {{ longitude }}</p>
+<p>Tire pressure:</p>
+<ul>
+    <li>Back left: {{ back_left_pressure }} psi</li>
+    <li>Back right: {{ back_right_pressure }} psi</li>
+    <li>Front left: {{ front_left_pressure }} psi</li>
+    <li>Front right: {{ front_right_pressure }} psi</li>
+</ul>
+<p>EV Battery:</p>
+<ul>
+
+    <li>Percent remaining: {{  percent_remaining }}%</li>
+    <li>Range: {{Battery_range}} mi</li>
+</ul>
+<p>capacity:</p>
+<ul>
+    <li>capacity: {{ battery_capacity }} kwh</li>
+</ul>
+<p>EV charging status:</p>
+<ul>
+    <li>Plugged in: {{  plugged_in }} </li>
+    <li>charge state: {{  charge_status }} </li>
+
+<div>{{ map_html | safe }}</div>
+</body>
+</html>
