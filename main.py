@@ -35,8 +35,8 @@ def create_map(latitude, longitude, icon_image_url):
 # global variable to save our access_token
 access = None
 client = smartcar.AuthClient(
-    client_id="0079ad0b-1c9b-4b74-ac0d-1b39619a4014",
-    client_secret="01a1a221-68b6-4a62-9023-5887109dfae1",
+    client_id="f2596194-3803-49e7-99e5-15131aba1ed6",
+    client_secret="9773c18d-92af-47ea-a0f2-6bd9b4bf07d1",
     redirect_uri="https://car-charging.herokuapp.com/exchange",
     mode="simulated"
 )
