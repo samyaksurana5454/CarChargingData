@@ -71,36 +71,7 @@ def exchange():
     access = client.exchange_code(code)
     return redirect('/vehicle')
 
-# ./main.py
 
-# ./main.py
-
-# @app.route('/vehicle', methods=['GET'])
-# # TODO: Request Step 2: Get vehicle information
-# def get_vehicle():
-#     # access our global variable to retrieve our access tokens
-#     global access
-#     # Send a request to get a list of vehicle ids
-#     vehicles = smartcar.get_vehicles(access.access_token)
-#     vehicle_ids = vehicles.vehicles
-#     # instantiate the first vehicle in the vehicle id list
-#     vehicle = smartcar.Vehicle(vehicle_ids[0], access.access_token)
-
-#     # Make a request to Smartcar API
-#     attributes = vehicle.attributes()
-#     odometer = vehicle.odometer()
-#     return render_template('vehicle.html',
-#                            make=attributes.make,
-#                            model=attributes.model,
-#                            year=attributes.year
-#                          )
-#     '''
-#     {
-#         "make": "TESLA",
-#         "model": "Model S",
-#         "year": 2014
-#     }
-#     '''
     
 @app.route('/vehicle', methods=['GET'])
 def get_vehicle():
