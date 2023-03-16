@@ -64,7 +64,7 @@ def get_vehicle():
     global access
     vehicles = smartcar.get_vehicles(access.access_token)
     vehicle_ids = vehicles.vehicles
-    vehicle = smartcar.Vehicle(vehicle_ids[0], access.access_token)
+    vehicle = smartcar.Vehicle(vehicle_ids, access.access_token)
     attributes = vehicle.attributes()
     odometer = vehicle.odometer()
     location = vehicle.location()
