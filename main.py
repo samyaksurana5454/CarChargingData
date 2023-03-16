@@ -35,8 +35,8 @@ def create_map(latitude, longitude, icon_image_url):
 # global variable to save our access_token
 access = None
 client = smartcar.AuthClient(
-    client_id="c422932e-7a1f-4ab0-8bdc-d7e81718575a",
-    client_secret="f6669cf3-5b70-4b22-8445-bcbb5be298ce",
+    client_id="70b19a73-d353-4822-aa78-40cf47a3e0ab",
+    client_secret="5696ffe3-7ec6-4a68-ab92-9cd4196c4ab6",
     redirect_uri="https://car-charging.herokuapp.com/exchange",
     mode="simulated"
 )
@@ -51,75 +51,59 @@ def login():
     auth_url = client.get_auth_url(scope)
     return redirect(auth_url)
 
-# @app.route('/exchange', methods=['GET'])
-# def exchange():
-#     code = request.args.get('code')
-#     global access
-#     access = client.exchange_code(code)
-#     return redirect('/vehicle')
 @app.route('/exchange', methods=['GET'])
 def exchange():
     code = request.args.get('code')
-
-    # TODO: Request Step 1: Obtain an access token
-    # access our global variable and store our access tokens
     global access
-    # in a production app you'll want to store this in some kind of
-    # persistent storage
     access = client.exchange_code(code)
-    
-    # Check if access token was successfully obtained
-    if access:
-        return redirect('/vehicle')
-    else:
-        return "Failed to obtain access token"
+    return redirect('/vehicle')
 
 
-
-    
 @app.route('/vehicle', methods=['GET'])
 def get_vehicle():
     global access
-    if access:
-        vehicles = smartcar.get_vehicles(access.access_token)
-        vehicle_ids = vehicles.vehicles
-        vehicle = smartcar.Vehicle(vehicle_ids[0], access.access_token)
-        attributes = vehicle.attributes()
-        odometer = vehicle.odometer()
-        location = vehicle.location()
-        pressure = vehicle.tire_pressure()
-        battery=vehicle.battery()
-        capacity=vehicle.battery_capacity()
-        charge=vehicle.charge()
+    vehicles = smartcar.get_vehicles(access.access_token)
+    vehicle_ids = vehicles.vehicles
+    vehicle = smartcar.Vehicle(vehicle_ids, access.access_token)
+    attributes = vehicle.attributes()
+    odometer = vehicle.odometer()
+    location = vehicle.location()
+    print(access)
+    pressure = vehicle.tire_pressure()
+    battery=vehicle.battery()
+    capacity=vehicle.battery_capacity()
+    charge=vehicle.charge()
 
-        # create a folium map object
-        car_image_url = 'https://cdn4.iconfinder.com/data/icons/small-n-flat/24/map-marker-512.png'
-        my_map = create_map(location.latitude, location.longitude, car_image_url)
 
-        # convert the folium map object to HTML
-        map_html = my_map._repr_html_()
+    # create a folium map object
+    car_image_url = 'https://cdn4.iconfinder.com/data/icons/small-n-flat/24/map-marker-512.png'
+    my_map = create_map(location.latitude, location.longitude, car_image_url)
 
-        # return a JSON object with the data and the folium map as HTML
-        return render_template('vehicle.html',
-                               make=attributes.make,
-                               model=attributes.model,
-                               year=attributes.year,
-                               distance=odometer.distance,
-                               latitude=location.latitude,
-                               longitude=location.longitude,
-                               back_left_pressure=pressure.back_left,
-                               back_right_pressure=pressure.back_right,
-                               front_left_pressure=pressure.front_left,
-                               front_right_pressure=pressure.front_right,
-                               Battery_range=battery.range,
-                               percent_remaining=battery.percent_remaining,
-                               battery_capacity=capacity.capacity,
-                               plugged_in=charge.is_plugged_in,
-                               charge_status=charge.state,
-                               map_html=map_html)
-    else:
-        return "Access token not found"
+    # convert the folium map object to HTML
+    map_html = my_map._repr_html_()
+    #print("samyak")
+    #print(map_html)
+    # return a JSON object with the data and the folium map as HTML
+    #return render_template('vehicle.html')
+    return render_template('vehicle.html',
+                           make=attributes.make,
+                           model=attributes.model,
+                           year=attributes.year,
+                           distance=odometer.distance,
+                           latitude=location.latitude,
+                           longitude=location.longitude,
+                           back_left_pressure=pressure.back_left,
+                           back_right_pressure=pressure.back_right,
+                           front_left_pressure=pressure.front_left,
+                           front_right_pressure=pressure.front_right,
+                           Battery_range=battery.range,
+                           percent_remaining=battery.percent_remaining,
+                           battery_capacity=capacity.capacity,
+                           plugged_in=charge.is_plugged_in,
+                           charge_status=charge.state,
 
+
+                           map_html=map_html)
 
 @app.errorhandler(Exception)
 def handle_error(error):
