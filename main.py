@@ -71,75 +71,75 @@ def exchange():
     access = client.exchange_code(code)
     return redirect('/vehicle')
 
-# @app.route('/vehicle', methods=['GET'])
-# # TODO: Request Step 2: Get vehicle information
-# def get_vehicle():
-#     # access our global variable to retrieve our access tokens
-#     global access
-#     # Send a request to get a list of vehicle ids
-#     vehicles = smartcar.get_vehicles(access.access_token)
-#     vehicle_ids = vehicles.vehicles
-#     # instantiate the first vehicle in the vehicle id list
-#     vehicle = smartcar.Vehicle(vehicle_ids[0], access.access_token)
-
-#     # Make a request to Smartcar API
-#     attributes = vehicle.attributes()
-#     return jsonify({
-#       "make": attributes.make,
-#       "model": attributes.model,
-#       "year": attributes.year    
-#     })
-#     '''
-#     {
-#         "make": "TESLA",
-#         "model": "Model S",
-#         "year": 2014
-#     }
-#     '''
-    @app.route('/vehicle', methods=['GET'])
-    def get_vehicle():
+@app.route('/vehicle', methods=['GET'])
+# TODO: Request Step 2: Get vehicle information
+def get_vehicle():
+    # access our global variable to retrieve our access tokens
     global access
+    # Send a request to get a list of vehicle ids
     vehicles = smartcar.get_vehicles(access.access_token)
     vehicle_ids = vehicles.vehicles
-    vehicle = smartcar.Vehicle(vehicle_ids, access.access_token)
+    # instantiate the first vehicle in the vehicle id list
+    vehicle = smartcar.Vehicle(vehicle_ids[0], access.access_token)
+
+    # Make a request to Smartcar API
     attributes = vehicle.attributes()
-    odometer = vehicle.odometer()
-    location = vehicle.location()
-    print(access)
-    pressure = vehicle.tire_pressure()
-    battery=vehicle.battery()
-    capacity=vehicle.battery_capacity()
-    charge=vehicle.charge()
+    return jsonify({
+      "make": attributes.make,
+      "model": attributes.model,
+      "year": attributes.year    
+    })
+    '''
+    {
+        "make": "TESLA",
+        "model": "Model S",
+        "year": 2014
+    }
+    '''
+#     @app.route('/vehicle', methods=['GET'])
+#     def get_vehicle():
+#     global access
+#     vehicles = smartcar.get_vehicles(access.access_token)
+#     vehicle_ids = vehicles.vehicles
+#     vehicle = smartcar.Vehicle(vehicle_ids, access.access_token)
+#     attributes = vehicle.attributes()
+#     odometer = vehicle.odometer()
+#     location = vehicle.location()
+#     print(access)
+#     pressure = vehicle.tire_pressure()
+#     battery=vehicle.battery()
+#     capacity=vehicle.battery_capacity()
+#     charge=vehicle.charge()
 
-    # create a folium map object
-    car_image_url = 'https://cdn4.iconfinder.com/data/icons/small-n-flat/24/map-marker-512.png'
-    my_map = create_map(location.latitude, location.longitude, car_image_url)
+#     # create a folium map object
+#     car_image_url = 'https://cdn4.iconfinder.com/data/icons/small-n-flat/24/map-marker-512.png'
+#     my_map = create_map(location.latitude, location.longitude, car_image_url)
 
-    # convert the folium map object to HTML
-    map_html = my_map._repr_html_()
-    #print("samyak")
-    #print(map_html)
-    # return a JSON object with the data and the folium map as HTML
-    #return render_template('vehicle.html')
-    return render_template('vehicle.html',
-                           make=attributes.make,
-                           model=attributes.model,
-                           year=attributes.year,
-                           distance=odometer.distance,
-                           latitude=location.latitude,
-                           longitude=location.longitude,
-                           back_left_pressure=pressure.back_left,
-                           back_right_pressure=pressure.back_right,
-                           front_left_pressure=pressure.front_left,
-                           front_right_pressure=pressure.front_right,
-                           Battery_range=battery.range,
-                           percent_remaining=battery.percent_remaining,
-                           battery_capacity=capacity.capacity,
-                           plugged_in=charge.is_plugged_in,
-                           charge_status=charge.state,
+#     # convert the folium map object to HTML
+#     map_html = my_map._repr_html_()
+#     #print("samyak")
+#     #print(map_html)
+#     # return a JSON object with the data and the folium map as HTML
+#     #return render_template('vehicle.html')
+#     return render_template('vehicle.html',
+#                            make=attributes.make,
+#                            model=attributes.model,
+#                            year=attributes.year,
+#                            distance=odometer.distance,
+#                            latitude=location.latitude,
+#                            longitude=location.longitude,
+#                            back_left_pressure=pressure.back_left,
+#                            back_right_pressure=pressure.back_right,
+#                            front_left_pressure=pressure.front_left,
+#                            front_right_pressure=pressure.front_right,
+#                            Battery_range=battery.range,
+#                            percent_remaining=battery.percent_remaining,
+#                            battery_capacity=capacity.capacity,
+#                            plugged_in=charge.is_plugged_in,
+#                            charge_status=charge.state,
 
 
-                           map_html=map_html)
+#                            map_html=map_html)
 
 @app.errorhandler(Exception)
 def handle_error(error):
