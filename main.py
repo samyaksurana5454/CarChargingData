@@ -88,10 +88,12 @@ def get_vehicle():
 
     # Make a request to Smartcar API
     attributes = vehicle.attributes()
+    odometer = vehicle.odometer()
     return jsonify({
       "make": attributes.make,
       "model": attributes.model,
-      "year": attributes.year    
+      "year": attributes.year,
+      "distance"=odometer.distance
     })
     '''
     {
