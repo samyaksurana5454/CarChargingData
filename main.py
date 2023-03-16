@@ -89,12 +89,11 @@ def get_vehicle():
     # Make a request to Smartcar API
     attributes = vehicle.attributes()
     odometer = vehicle.odometer()
-    return jsonify({
-      "make": attributes.make,
-      "model": attributes.model,
-      "year": attributes.year
-      
-    })
+    return render_template('vehicle.html',
+                           make=attributes.make,
+                           model=attributes.model,
+                           year=attributes.year
+                         )
     '''
     {
         "make": "TESLA",
