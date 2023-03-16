@@ -73,6 +73,8 @@ def exchange():
 
 # ./main.py
 
+# ./main.py
+
 @app.route('/vehicle', methods=['GET'])
 # TODO: Request Step 2: Get vehicle information
 def get_vehicle():
@@ -86,40 +88,11 @@ def get_vehicle():
 
     # Make a request to Smartcar API
     attributes = vehicle.attributes()
-    odometer = vehicle.odometer()
-    location = vehicle.location()
-    print(access)
-    pressure = vehicle.tire_pressure()
-    battery=vehicle.battery()
-    capacity=vehicle.battery_capacity()
-    charge=vehicle.charge()
-
-    # create a folium map object
-    car_image_url = 'https://cdn4.iconfinder.com/data/icons/small-n-flat/24/map-marker-512.png'
-    my_map = create_map(location.latitude, location.longitude, car_image_url)
-
-    # convert the folium map object to HTML
-    map_html = my_map._repr_html_()
-    
-    return render_template('vehicle.html',
-                           make=attributes.make,
-                           model=attributes.model,
-                           year=attributes.year,
-                           distance=odometer.distance,
-                           latitude=location.latitude,
-                           longitude=location.longitude,
-                           back_left_pressure=pressure.back_left,
-                           back_right_pressure=pressure.back_right,
-                           front_left_pressure=pressure.front_left,
-                           front_right_pressure=pressure.front_right,
-                           Battery_range=battery.range,
-                           percent_remaining=battery.percent_remaining,
-                           battery_capacity=capacity.capacity,
-                           plugged_in=charge.is_plugged_in,
-                           charge_status=charge.state,
-
-
-                           map_html=map_html)
+    return jsonify({
+      "make": attributes.make,
+      "model": attributes.model,
+      "year": attributes.year    
+    })
     '''
     {
         "make": "TESLA",
@@ -127,6 +100,7 @@ def get_vehicle():
         "year": 2014
     }
     '''
+    
 #     @app.route('/vehicle', methods=['GET'])
 #     def get_vehicle():
 #     global access
