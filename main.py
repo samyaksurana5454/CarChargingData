@@ -71,6 +71,8 @@ def exchange():
     access = client.exchange_code(code)
     return redirect('/vehicle')
 
+# ./main.py
+
 @app.route('/vehicle', methods=['GET'])
 # TODO: Request Step 2: Get vehicle information
 def get_vehicle():
