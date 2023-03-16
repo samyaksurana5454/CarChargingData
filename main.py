@@ -51,13 +51,25 @@ def login():
     auth_url = client.get_auth_url(scope)
     return redirect(auth_url)
 
+# @app.route('/exchange', methods=['GET'])
+# def exchange():
+#     code = request.args.get('code')
+#     global access
+#     access = client.exchange_code(code)
+#     return redirect('/vehicle')
+access = None
+
 @app.route('/exchange', methods=['GET'])
 def exchange():
     code = request.args.get('code')
+
+    # TODO: Request Step 1: Obtain an access token
+    # access our global variable and store our access tokens
     global access
+    # in a production app you'll want to store this in some kind of
+    # persistent storage
     access = client.exchange_code(code)
     return redirect('/vehicle')
-
 
 @app.route('/vehicle', methods=['GET'])
 # TODO: Request Step 2: Get vehicle information
