@@ -102,8 +102,8 @@ def exchange():
 #     }
 #     '''
     
-    @app.route('/vehicle', methods=['GET'])
-    def get_vehicle():
+@app.route('/vehicle', methods=['GET'])
+def get_vehicle():
     global access
     vehicles = smartcar.get_vehicles(access.access_token)
     vehicle_ids = vehicles.vehicles
