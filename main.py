@@ -92,8 +92,8 @@ def get_vehicle():
     return jsonify({
       "make": attributes.make,
       "model": attributes.model,
-      "year": attributes.year,
-      "distance"=odometer.distance
+      "year": attributes.year
+      
     })
     '''
     {
