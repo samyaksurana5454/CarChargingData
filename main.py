@@ -96,6 +96,20 @@ def exchange():
 #         "year": 2014
 #     }
 #     '''
+    @app.route('/vehicle', methods=['GET'])
+    def get_vehicle():
+    global access
+    vehicles = smartcar.get_vehicles(access.access_token)
+    vehicle_ids = vehicles.vehicles
+    vehicle = smartcar.Vehicle(vehicle_ids, access.access_token)
+    attributes = vehicle.attributes()
+    odometer = vehicle.odometer()
+    location = vehicle.location()
+    print(access)
+    pressure = vehicle.tire_pressure()
+    battery=vehicle.battery()
+    capacity=vehicle.battery_capacity()
+    charge=vehicle.charge()
 
     # create a folium map object
     car_image_url = 'https://cdn4.iconfinder.com/data/icons/small-n-flat/24/map-marker-512.png'
