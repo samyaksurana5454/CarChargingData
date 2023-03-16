@@ -35,8 +35,8 @@ def create_map(latitude, longitude, icon_image_url):
 # global variable to save our access_token
 access = None
 client = smartcar.AuthClient(
-    client_id="70b19a73-d353-4822-aa78-40cf47a3e0ab",
-    client_secret="5696ffe3-7ec6-4a68-ab92-9cd4196c4ab6",
+    client_id="0fcc1c6d-4e3d-48ae-a21d-3b1311efb1dc",
+    client_secret="5f33abd6-1970-4b1d-b712-f90955adf2ab",
     redirect_uri="https://car-charging.herokuapp.com/exchange",
     mode="simulated"
 )
@@ -47,7 +47,7 @@ def hello_world():
 
 @app.route("/login", methods=["GET"])
 def login():
-    scope = ['read_vehicle_info', 'read_odometer', 'read_location', 'read_tires', 'read_battery', 'read_charge']
+    scope = ['read_vehicle_info', 'read_odometer', 'read_location', 'read_tires', 'read_battery']
     auth_url = client.get_auth_url(scope)
     return redirect(auth_url)
 
@@ -64,15 +64,14 @@ def get_vehicle():
     global access
     vehicles = smartcar.get_vehicles(access.access_token)
     vehicle_ids = vehicles.vehicles
-    vehicle = smartcar.Vehicle(vehicle_ids, access.access_token)
+    vehicle = smartcar.Vehicle(vehicle_ids[0], access.access_token)
     attributes = vehicle.attributes()
     odometer = vehicle.odometer()
     location = vehicle.location()
-    print(access)
     pressure = vehicle.tire_pressure()
     battery=vehicle.battery()
     capacity=vehicle.battery_capacity()
-    charge=vehicle.charge()
+   # charge=vehicle.charge()
 
 
     # create a folium map object
@@ -99,8 +98,8 @@ def get_vehicle():
                            Battery_range=battery.range,
                            percent_remaining=battery.percent_remaining,
                            battery_capacity=capacity.capacity,
-                           plugged_in=charge.is_plugged_in,
-                           charge_status=charge.state,
+#                            plugged_in=charge.is_plugged_in,
+#                            charge_status=charge.state,
 
 
                            map_html=map_html)
