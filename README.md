@@ -20,7 +20,7 @@ $ git clone https://github.com/smartcar/getting-started-python-sdk.git
 $ cd getting-started-python-sdk/app
 ```
 
-**Note:** We recommend you use a virtual environment. Refer to [this guide](https://docs.python.org/3/tutorial/venv.html). 
+
 
 
 To install the required dependencies and run this Python app -
@@ -33,7 +33,4 @@ Once your server is up and running, you can authenticate your vehicle. In our cu
 
 
 
-## Next Steps
-Read our [API Docs](https://smartcar.com/docs/api) to learn what else you can do with Smartcar's API.
 
-Learn more about the [Python SDK](https://github.com/smartcar/python-sdk) and how it can be used.
