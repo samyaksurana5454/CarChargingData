@@ -1,6 +1,4 @@
-This is the starter kit for Python SDK.
 
-This kit contains a simple web application that displays car information using Smartcar's Python SDK.
 
 ## Instructions
 Before we get started, create an application on Smartcar's Developer Dashboard to get your API keys.
