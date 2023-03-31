@@ -27,7 +27,7 @@ $ pip install -r requirements.txt
 $ python main.py
 ```
 
-Once your server is up and running, you can authenticate your vehicle. In our current set up, we are using Smartcar's [test mode](https://smartcar.com/docs/guides/testing/), so you can log in with any username and password. To authenticate, navigate to `https://car-charging.herokuapp.com/login`. Once you have authenticated, go to `https://car-charging.herokuapp.com/vehicle` to see your vehicle information.
+Once your server is up and running, you can authenticate your vehicle. In our current set up, we are using Smartcar's [simulated mode](https://smartcar.com/docs/guides/testing/), so you can log in username and password given in Smartcar.com. To authenticate, navigate to `https://car-charging.herokuapp.com/login`. Once you have authenticated, go to `https://car-charging.herokuapp.com/vehicle` to see your vehicle information.
 
 
 
